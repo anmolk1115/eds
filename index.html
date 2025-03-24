@@ -28,21 +28,6 @@
         </div>
     </nav>
     <div class="container">
-        <!-- <input type="text" placeholder="Search products..." onkeyup="onSearch(event)" /> -->
-        <!-- <div>Filter</div> -->
-        <!-- <select onchange="onSort(event)">
-            <option value="">Sort by</option>
-            <option value="ascending">Prices low to high</option>
-            <option value="descending">Prices high to low</option>
-        </select> -->
-        <!-- <label for="minPrice">Min Price:</label>
-        <input type="number" id="minPrice" name="minPrice" value="0">
-        <label for="maxPrice">Max Price:</label>
-        <input type="number" id="maxPrice" name="maxPrice" value="10000">
-        <button onclick="filterProducts(event, 'price')">Filter</button> -->
-        <!-- <select id="category" onchange="filterProducts(event, 'category')">
-            <option value="all">All Categories</option>
-        </select> -->
         <div class="outer-info-section">
             <div class="info-section">
                 <div id="fallbackContent" class="fallback">
@@ -58,9 +43,7 @@
             </div>
         </div>
         <div class="page-layout">
-            <!-- <input type="text" placeholder="Search products..." onkeyup="onSearch(event)" /> -->
             <div id="filter-checkbox-container" class="filter-section">Filter
-                <!-- <label><input type="checkbox" class="category" value="electronics">Electronics</label> -->
                 <div class="price-filter-container">
                     <label for="minPrice">Min Price:</label>
                     <input type="number" id="minPrice" name="minPrice" value="0">
@@ -73,7 +56,6 @@
                 <div id="loader">Loading, please wait...</div>
                 <p id="error"></p>
             </div>
-            <!-- <div id="load-more-container"></div> -->
         </div>
         <div id="lower-info-section"></div>
     </div>

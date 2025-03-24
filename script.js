@@ -1,11 +1,10 @@
-console.log('script loaded');
 let limit = 10;
 const productsApiEndpoint = 'https://fakestoreapi.com/products';
 let productData = [];
 let isRerendered = false;
 let categoryEvent;
 let loading = false;
-// https://fakestoreapi.com/products?limit=5
+
 function getApiQuery(isLoadMore) {
     if (isLoadMore) {
         limit = limit + 10;
@@ -34,17 +33,13 @@ const fetchProducts = async (endpoint) => {
 };
 
 window.addEventListener('load', async () => {
-    console.log('onload called');
     productData = await fetchProducts(getApiQuery());
-    console.log('sss', productData);
     renderProductCard(productData);
 });
 
 document.body.addEventListener('click', async function (event) {
     if (event.target.id == 'load-more') {
-        console.log('button clicked');
         productData = await fetchProducts(getApiQuery(true));
-        console.log('latest', productData);
         renderProductCard(productData);
     };
 });
@@ -69,7 +64,6 @@ function loader(flag) {
 }
 
 function onSearch(event) {
-    console.log('searching....', event.target.value);
     let searchQuery = event.target.value;
     if (searchQuery) {
         let filteredProducts = productData?.filter(product => {
@@ -111,26 +105,13 @@ function onSort(event) {
 
 function populateCategoryFilter() {
     let allCategories = [];
-    console.log('products', productData);
     productData.forEach(product => {
         const { category } = product;
         allCategories.push(category);
     });
     allCategories = new Set([...allCategories]);
-    console.log('categories', allCategories);
-    // const categoryFilterElement = document.getElementById('category');
     const filterCheckboxContainer = document.getElementById('filter-checkbox-container');
-    // removeAllNodes();
     resetCategoryFilter();
-    // allCategories.forEach(elem => {
-    //     if (!Array.from(categoryFilterElement.options).some(option => option.value === category)) {
-    //         const newOption = document.createElement('option');
-    //         newOption.value = `${elem.toString().toLowerCase()}`;
-    //         newOption.text = elem;
-    //         newOption.className = "category-option";
-    //         categoryFilterElement.appendChild(newOption);
-    //     }
-    // });
     allCategories.forEach(categoryType => {
         const label = document.createElement('label');
         label.textContent = categoryType;
@@ -139,20 +120,17 @@ function populateCategoryFilter() {
         checkbox.value = `${categoryType.toString().toLowerCase()}`;
         checkbox.type = 'checkbox';
         checkbox.className = "category-checkbox";
-        // checkbox.addEventListener.event = 
         label.appendChild(checkbox);
         filterCheckboxContainer.appendChild(label);
     })
     if (categoryEvent) {
-        // categoryFilterElement.value = categoryEvent;
-        // setting checkbox value
         document.querySelectorAll('.category-checkbox').forEach(checkbox => {
             if(checkbox.value === categoryEvent) {
                 checkbox.checked = true;
             }
         });
     }
-    // adding event to checkboxes
+
     document.querySelectorAll('.category-checkbox').forEach(checkbox => {
         checkbox.addEventListener('change', (event) => filterProducts(event, 'category'));
     });
@@ -169,7 +147,7 @@ function filterProducts(event, basis) {
                 return product;
             }
         });
-        // resetCategoryFilter()
+        
         renderProductCard(filteredProducts);
     } else if (basis === 'price') {
         const minPrice = parseInt(document.getElementById('minPrice').value);
@@ -178,10 +156,7 @@ function filterProducts(event, basis) {
         productData.forEach(product => {
             const price = parseInt(product.price);
             if (price >= minPrice && price <= maxPrice) {
-                // product.style.display = 'block';
                 priceFilteredProducts.push(product);
-            } else {
-                // product.style.display = 'none';
             }
         });
         removeAllNodes();
@@ -190,13 +165,6 @@ function filterProducts(event, basis) {
 }
 
 function resetCategoryFilter() {
-    // const categoryFilterElement = document.getElementById('category');
-    // console.log('optionElements', categoryFilterElement.options);
-    // Array.from(categoryFilterElement.options).forEach(option => {
-    //     if (option.className === 'category-option') {
-    //         option.remove();
-    //     }
-    // });
     document.querySelectorAll('.category-checkbox-label').forEach(checkbox => checkbox.remove());
 };
 
