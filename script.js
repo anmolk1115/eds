@@ -4,6 +4,8 @@ let productData = [];
 let isRerendered = false;
 let categoryEvent;
 let loading = false;
+let showMobileNavigationMenu = false;
+let filterSelections = [];
 
 function getApiQuery(isLoadMore) {
     if (isLoadMore) {
@@ -34,14 +36,21 @@ const fetchProducts = async (endpoint) => {
 
 window.addEventListener('load', async () => {
     productData = await fetchProducts(getApiQuery());
+    populateCategoryFilter(productData);
     renderProductCard(productData);
 });
 
 document.body.addEventListener('click', async function (event) {
     if (event.target.id == 'load-more') {
         productData = await fetchProducts(getApiQuery(true));
+        populateCategoryFilter(productData);
         renderProductCard(productData);
     };
+    if(showMobileNavigationMenu) {
+        const navigationIcon = document.getElementById('mobile-navigations');
+        showMobileNavigationMenu = !showMobileNavigationMenu;
+        navigationIcon.style.display = 'none';
+    }
 });
 
 function loader(flag) {
@@ -65,10 +74,16 @@ function loader(flag) {
 
 function onSearch(event) {
     let searchQuery = event.target.value;
+    let searchErrorElement;
+    if(window.innerWidth > 767) {
+        searchErrorElement = document.getElementById('search-error');
+    } else {
+        searchErrorElement = document.getElementById('error');
+    }
     if (searchQuery) {
         let filteredProducts = productData?.filter(product => {
-            const { description } = product;
-            if (description.toLowerCase().includes(searchQuery)) {
+            const { title } = product;
+            if (title.toLowerCase().includes(searchQuery.toLowerCase())) {
                 removeAllNodes();
                 return product;
             }
@@ -76,18 +91,18 @@ function onSearch(event) {
         if (filteredProducts.length) {
             renderProductCard(filteredProducts);
         } else {
-            const searchErrorElement = document.getElementById('fallbackContent');
             searchErrorElement.style.display = 'block';
             searchErrorElement.textContent = `No products available for '${searchQuery}'`;
         }
     } else {
         removeAllNodes();
+        searchErrorElement.style.display = 'none';
+        searchErrorElement.textContent = '';
         renderProductCard(productData);
     }
 }
 
 function onSort(event) {
-    console.log('sort by....', event.target.value);
     let sortBy = event.target.value;
     if (sortBy) {
         if (sortBy === 'ascending') {
@@ -103,9 +118,9 @@ function onSort(event) {
     }
 }
 
-function populateCategoryFilter() {
+function populateCategoryFilter(allproducts) {
     let allCategories = [];
-    productData.forEach(product => {
+    allproducts.forEach(product => {
         const { category } = product;
         allCategories.push(category);
     });
@@ -132,29 +147,59 @@ function populateCategoryFilter() {
     }
 
     document.querySelectorAll('.category-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', (event) => filterProducts(event, 'category'));
+        checkbox.addEventListener('change', (event) => {
+            updateSelectedValues(checkbox, 'category');
+        });
     });
 }
 
+function updateSelectedValues(checkbox, basis) {
+    if (checkbox.checked) {
+        filterSelections.push(checkbox.value);
+    } else {
+        const index = filterSelections.indexOf(checkbox.value);
+        if (index > -1) {
+            filterSelections.splice(index, 1);
+        }
+    }
+    
+    filterProducts(basis)
+}
 
-function filterProducts(event, basis) {
+function hamburgerClick(event) {
+    event.stopPropagation();
+    const navigationIcon = document.getElementById('mobile-navigations');
+    showMobileNavigationMenu = !showMobileNavigationMenu;
+    if(showMobileNavigationMenu) {
+        navigationIcon.style.display = 'block';
+    } else {
+        navigationIcon.style.display = 'none';
+    }
+}
+
+
+function filterProducts(basis) {
     if (basis === 'category') {
-        categoryEvent = event.target.value;
         let filteredProducts = productData?.filter(product => {
             const { category } = product;
-            if (category.includes(categoryEvent)) {
-                removeAllNodes();
+            if(filterSelections.length) {
+                if (filterSelections.includes(category)) {
+                    return product;
+                }
+            } else {
                 return product;
             }
+                
         });
-        
+
+        removeAllNodes();
         renderProductCard(filteredProducts);
     } else if (basis === 'price') {
         const minPrice = parseInt(document.getElementById('minPrice').value);
         const maxPrice = parseInt(document.getElementById('maxPrice').value);
         let priceFilteredProducts = [];
         productData.forEach(product => {
-            const price = parseInt(product.price);
+            const price = parseFloat(product.price);
             if (price >= minPrice && price <= maxPrice) {
                 priceFilteredProducts.push(product);
             }
@@ -188,7 +233,6 @@ const renderProductCard = (products) => {
         removeAllNodes();
     }
     document.getElementById('resultCount').textContent = `${products.length} results`;
-    populateCategoryFilter();
     if (products.length) {
         const cardContainer = document.getElementById('card-container-id');
         const lowerInfoSection = document.getElementById('lower-info-section');
