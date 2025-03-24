@@ -1,0 +1,283 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+    position: relative;
+    min-height: 500px;
+    width: 100%;
+}
+
+.page-layout {
+    display: flex;
+    justify-content: space-around;
+}
+
+.product-image-container {
+    width: auto;
+    height: 250px;
+    margin: auto;
+}
+
+.product-card {
+    width: calc(33.33% - 20px);
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 4px;
+    margin: 4px;
+}
+
+.load-more-button {
+    display: block;
+    margin: 12px auto;
+}
+
+.fallback,
+.error {
+    color: red;
+    font-size: 18px;
+    margin: 20px;
+}
+
+.container,
+.outer-info-section {
+    max-width: 1200px;
+    margin: auto;
+}
+
+#filter-checkbox-container,
+.price-filter-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.category-checkbox-label {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.info-section {
+    display: flex;
+}
+
+#resultCount,
+#search-field,
+#fallbackContent {
+    flex: 1;
+}
+
+.sortby {
+    flex: 1;
+}
+
+.bars {
+    display: none;
+}
+
+.loader {
+    display: none;
+}
+
+.navbar {
+    background-color: #0052cc;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1280px;
+    margin: auto;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.cart-icon img {
+    width: 24px;
+    height: 24px;
+}
+
+footer {
+    background-color: #fff;
+    padding: 20px 50px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #666;
+}
+
+.footer-section ul li a:hover {
+    color: #000;
+}
+
+.social-icons img {
+    width: 24px;
+    margin-right: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-bottom a {
+    text-decoration: none;
+    color: #666;
+}
+
+.footer-bottom a:hover {
+    color: #000;
+}
+
+@media (max-width: 600px) {
+    .product-card {
+        width: calc(50% - 20px);
+    }
+
+    .page-layout {
+        display: unset;
+    }
+
+    .product-image-container {
+        width: auto;
+        height: 180px;
+    }
+
+    .card-container {
+        justify-content: center;
+    }
+
+    body {
+        width: fit-content;
+    }
+
+    .navbar {
+        position: relative;
+    }
+
+    .navbar-container {
+        position: absolute;
+        height: 70px;
+        left: 0;
+        right: 0;
+        background-color: #0052cc;
+    }
+
+    .logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .cart-icon {
+        position: absolute;
+        right: 20px;
+    }
+
+    .bars {
+        display: block;
+        position: absolute;
+        left: 2px;
+    }
+
+    .bars img {
+        width: 35px;
+    }
+
+    .outer-info-section {
+        position: relative;
+    }
+
+    .info-section {
+        position: absolute;
+        top: 80px;
+        padding: 8px;
+        display: unset;
+    }
+
+    .fallback {
+        margin: 8px;
+    }
+
+    #resultCount {
+        margin: 8px 0;
+    }
+
+    .price-filter-container {
+        padding: 8px;
+        margin-top: 140px;
+    }
+}

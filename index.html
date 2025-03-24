@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./styles.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="bars">
+                <img src="images/hamburger.png" alt="Cart" />
+            </div>
+            <div class="logo">/ENIA</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Men</a></li>
+                <li><a href="#">Smart Gear</a></li>
+                <li><a href="#">Accessories</a></li>
+            </ul>
+            <div class="cart-icon">
+                <img src="images/cart-icon.png" alt="Cart" />
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- <input type="text" placeholder="Search products..." onkeyup="onSearch(event)" /> -->
+        <!-- <div>Filter</div> -->
+        <!-- <select onchange="onSort(event)">
+            <option value="">Sort by</option>
+            <option value="ascending">Prices low to high</option>
+            <option value="descending">Prices high to low</option>
+        </select> -->
+        <!-- <label for="minPrice">Min Price:</label>
+        <input type="number" id="minPrice" name="minPrice" value="0">
+        <label for="maxPrice">Max Price:</label>
+        <input type="number" id="maxPrice" name="maxPrice" value="10000">
+        <button onclick="filterProducts(event, 'price')">Filter</button> -->
+        <!-- <select id="category" onchange="filterProducts(event, 'category')">
+            <option value="all">All Categories</option>
+        </select> -->
+        <div class="outer-info-section">
+            <div class="info-section">
+                <div id="fallbackContent" class="fallback">
+                    <p id="search-error"></p>
+                </div>
+                <p id="resultCount"></p>
+                <input id="search-field" type="text" placeholder="Search products..." onkeyup="onSearch(event)" />
+                <select class="sortby" onchange="onSort(event)">
+                    <option value="">Sort by</option>
+                    <option value="ascending">Prices low to high</option>
+                    <option value="descending">Prices high to low</option>
+                </select>
+            </div>
+        </div>
+        <div class="page-layout">
+            <!-- <input type="text" placeholder="Search products..." onkeyup="onSearch(event)" /> -->
+            <div id="filter-checkbox-container" class="filter-section">Filter
+                <!-- <label><input type="checkbox" class="category" value="electronics">Electronics</label> -->
+                <div class="price-filter-container">
+                    <label for="minPrice">Min Price:</label>
+                    <input type="number" id="minPrice" name="minPrice" value="0">
+                    <label for="maxPrice">Max Price:</label>
+                    <input type="number" id="maxPrice" name="maxPrice" value="10000">
+                    <button onclick="filterProducts(event, 'price')">Filter</button>
+                </div>
+            </div>
+            <div id="card-container-id" class="card-container">
+                <div id="loader">Loading, please wait...</div>
+                <p id="error"></p>
+            </div>
+            <!-- <div id="load-more-container"></div> -->
+        </div>
+        <div id="lower-info-section"></div>
+    </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Account</h3>
+                <ul>
+                    <li><a href="#">Sign In</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Order Status</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Help</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+    <script src="./script.js"></script>
+</body>
+
+</html>
