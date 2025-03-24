@@ -12,9 +12,9 @@
     <nav class="navbar">
         <div class="navbar-container">
             <div class="bars">
-                <img src="images/hamburger.png" alt="Cart" />
+                <img src="images/hamburger.png" alt="Cart" onclick="hamburgerClick(event)" />
             </div>
-            <div class="logo">/ENIA</div>
+            <div class="logo">VENIA</div>
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Women</a></li>
@@ -25,6 +25,15 @@
             <div class="cart-icon">
                 <img src="images/cart-icon.png" alt="Cart" />
             </div>
+            <div id="mobile-navigations">
+                <ul class="mobile-nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Smart Gear</a></li>
+                    <li><a href="#">Accessories</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="container">
@@ -32,6 +41,7 @@
             <div class="info-section">
                 <div id="fallbackContent" class="fallback">
                     <p id="search-error"></p>
+                    <p id="breadcrumb">Clothing / Women's / Outerwear</p>
                 </div>
                 <p id="resultCount"></p>
                 <input id="search-field" type="text" placeholder="Search products..." onkeyup="onSearch(event)" />
@@ -49,12 +59,12 @@
                     <input type="number" id="minPrice" name="minPrice" value="0">
                     <label for="maxPrice">Max Price:</label>
                     <input type="number" id="maxPrice" name="maxPrice" value="10000">
-                    <button onclick="filterProducts(event, 'price')">Filter</button>
+                    <button id="filter-button" onclick="filterProducts(event, 'price')">Filter</button>
                 </div>
             </div>
+            <p id="error"></p>
             <div id="card-container-id" class="card-container">
                 <div id="loader">Loading, please wait...</div>
-                <p id="error"></p>
             </div>
         </div>
         <div id="lower-info-section"></div>
